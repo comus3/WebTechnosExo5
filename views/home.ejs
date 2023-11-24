@@ -20,7 +20,10 @@
                 %>
                 <li>
                     <%=taskList[i]%>
-                    <a href="?delete=<%=i%>" name = delete>delete</a>
+                    <form method = "post" action = "deleteTask">
+                        <input type = "hidden" name="delete" default = <% i%>>
+                        <input type="submit" value="delete">
+                    </form>
                 </li>
             <%};%>
         </ul>
