@@ -21,7 +21,7 @@
                 <li>
                     <%=taskTable[i].task%>
                     <form method = "post" action = "deleteTask">
-                        <input type = "hidden" name="delete" default = <% i%>>
+                        <input type = "hidden" name="delete" value= <%= taskTable[i].taskID %>>
                         <input type="submit" value="delete">
                     </form>
                 </li>
