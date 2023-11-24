@@ -16,49 +16,46 @@ const getUserData = (response) => {
         if (error) {
         response.status(400).send(error);
         } else {
+        let dataBase = {}
         response.status(200);
-        let dataBase = resultSQL;
+        dataBase = resultSQL;
         console.log(dataBase);
-        response.render('home.ejs', { DBData: dataBase });
+        response.render('home.ejs', { taskTable: dataBase });
         }
     });
 };
   
 
-//creer la liste
-
-let taskList = [];
-//mettre les elems exemple
 
 
 app.use(express.static('public'));
+
+
 app.post('/addTask', (request,response)=>{
 
     if (request.body.task != null){
-        taskList.push(request.body.task);
+        //taskList.push(request.body.task);
     }
-    
-    response.render('home.ejs', { taskList : taskList });
+    getUserData()
 })
 
 app.post('/deleteTask', (request,response)=>{
 
     if (request.body.delete != null){
-        taskList.splice(request.body.delete,1);
+        //taskList.splice(request.body.delete,1);
     }
-    
-    response.render('home.ejs', { taskList : taskList });
+    getUserData()
 })
 
 app.get('/',(request,response)=>{
     getUserData(response, connection);
-    response.render('home.ejs', { taskList : taskList });
 })
+
+
 app.listen(3000, function(){
     console.log("Server ok");
 });
 
-//// Page LOgic
 
 
 

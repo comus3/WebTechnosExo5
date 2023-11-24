@@ -16,10 +16,10 @@
             <input type="submit" value="Submit">
         </form>
         <ul id="taskList">
-            <% for(var i = 0; i < taskList.length; i++){
+            <% for(var i = 0; i < taskTable.length; i++){
                 %>
                 <li>
-                    <%=taskList[i]%>
+                    <%=taskTable[i].task%>
                     <form method = "post" action = "deleteTask">
                         <input type = "hidden" name="delete" default = <% i%>>
                         <input type="submit" value="delete">
