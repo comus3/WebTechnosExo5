@@ -6,13 +6,30 @@ app.set("view engine","ejs");
 app.use(express.urlencoded({extended:true}));
 
 
+//db.js
+
+let connection = require('./db.js');
+
+
+const getUserData = (response) => {
+    connection.query("SELECT * FROM user;", function (error, resultSQL) {
+        if (error) {
+        response.status(400).send(error);
+        } else {
+        response.status(200);
+        let dataBase = resultSQL;
+        console.log(dataBase);
+        response.render('home.ejs', { DBData: dataBase });
+        }
+    });
+};
+  
+
 //creer la liste
 
 let taskList = [];
 //mettre les elems exemple
-taskList.push("MANGER 1ere fois");
-taskList.push("MAnger ENCOREREE");
-taskList.push("Miam manger 3eme fois");
+
 
 app.use(express.static('public'));
 app.post('/addTask', (request,response)=>{
@@ -34,6 +51,7 @@ app.post('/deleteTask', (request,response)=>{
 })
 
 app.get('/',(request,response)=>{
+    getUserData(response, connection);
     response.render('home.ejs', { taskList : taskList });
 })
 app.listen(3000, function(){
