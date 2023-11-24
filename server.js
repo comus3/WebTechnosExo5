@@ -1,5 +1,5 @@
 let express = require('express');
-
+app.use(express.urlencoded({extended:True}))
 
 
 //creer la liste
@@ -12,7 +12,7 @@ taskList.push("Miam manger 3eme fois");
 
 let app = express();
 app.use(express.static('public'));
-app.get('/', (request,response)=>{
+app.post('/addTask', (request,response)=>{
 
     if (request.query.task != null){
         taskList.push(request.query.task);
@@ -23,7 +23,7 @@ app.get('/', (request,response)=>{
     response.render('home.ejs', { taskList : taskList });
 })
 
-app.get
+app.get('')
 
 app.listen(3000, function(){
     console.log("Server ok");
